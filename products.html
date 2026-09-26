@@ -1,15 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>StockSense | Products</title>
+    <title>StockSense | Operations</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="style.css">
 
 </head>
 
@@ -39,24 +42,39 @@
 
         <nav>
 
-            <a class="nav-item" href="dashboard.html">
+            <a class="nav-item"
+               href="dashboard.html">
+
                 <span>⌂</span>
                 Dashboard
+
             </a>
 
-            <a class="nav-item active" href="products.html">
+
+            <a class="nav-item"
+               href="products.html">
+
                 <span>▦</span>
                 Products
+
             </a>
 
-            <a class="nav-item" href="operations.html">
+
+            <a class="nav-item active"
+               href="operations.html">
+
                 <span>⇄</span>
                 Operations
+
             </a>
 
-            <a class="nav-item" href="operations.html#history">
+
+            <a class="nav-item"
+               href="#history">
+
                 <span>◷</span>
                 Move History
+
             </a>
 
         </nav>
@@ -64,14 +82,21 @@
 
         <div class="sidebar-bottom">
 
-            <a class="nav-item" href="#">
+            <a class="nav-item"
+               href="#">
+
                 <span>⚙</span>
                 Settings
+
             </a>
 
-            <button class="logout-btn" onclick="logoutUser()">
+
+            <button class="logout-btn"
+                    onclick="logoutUser()">
+
                 <span>↪</span>
                 Logout
+
             </button>
 
         </div>
@@ -88,67 +113,131 @@
             <div>
 
                 <p class="small-label">
-                    Inventory
+                    Inventory Operations
                 </p>
 
                 <h1>
-                    Products
+                    Operations
                 </h1>
 
                 <p class="muted">
-                    Create and manage your products.
+                    Manage incoming, outgoing and internal stock.
                 </p>
 
             </div>
 
-
-            <button class="primary-btn small-btn"
-                    onclick="openProductModal()">
-
-                + Add Product
-
-            </button>
-
         </header>
 
 
-        <!-- SEARCH -->
+        <!-- OPERATION CARDS -->
 
-        <section class="panel">
+        <section class="operation-grid">
 
-            <div class="search-area">
 
-                <input
-                    type="text"
-                    id="productSearch"
-                    placeholder="Search by product name or SKU..."
-                    onkeyup="renderProducts()"
-                >
+            <div class="operation-card">
 
-                <select id="categoryFilter"
-                        onchange="renderProducts()">
+                <div class="operation-icon receive">
+                    ↓
+                </div>
 
-                    <option value="all">
-                        All Categories
-                    </option>
+                <h2>
+                    Receive Stock
+                </h2>
 
-                    <option value="Electronics">
-                        Electronics
-                    </option>
+                <p>
+                    Record goods received from vendors.
+                </p>
 
-                    <option value="Furniture">
-                        Furniture
-                    </option>
+                <button onclick="receiveStock()">
+                    Create Receipt
+                </button>
 
-                    <option value="Office Supplies">
-                        Office Supplies
-                    </option>
+            </div>
 
-                    <option value="Raw Materials">
-                        Raw Materials
-                    </option>
 
-                </select>
+            <div class="operation-card">
+
+                <div class="operation-icon delivery">
+                    ↑
+                </div>
+
+                <h2>
+                    Delivery Order
+                </h2>
+
+                <p>
+                    Record outgoing customer shipments.
+                </p>
+
+                <button onclick="deliverStock()">
+                    Create Delivery
+                </button>
+
+            </div>
+
+
+            <div class="operation-card">
+
+                <div class="operation-icon transfer">
+                    ⇄
+                </div>
+
+                <h2>
+                    Internal Transfer
+                </h2>
+
+                <p>
+                    Move stock between locations.
+                </p>
+
+                <button onclick="transferStock()">
+                    Create Transfer
+                </button>
+
+            </div>
+
+
+            <div class="operation-card">
+
+                <div class="operation-icon adjustment">
+                    ⚖
+                </div>
+
+                <h2>
+                    Stock Adjustment
+                </h2>
+
+                <p>
+                    Correct physical stock mismatches.
+                </p>
+
+                <button onclick="adjustStock()">
+                    Adjust Stock
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- HISTORY -->
+
+        <section class="panel"
+                 id="history">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Stock Ledger
+                    </h2>
+
+                    <p>
+                        Every inventory movement is logged here.
+                    </p>
+
+                </div>
 
             </div>
 
@@ -161,16 +250,10 @@
 
                         <tr>
 
+                            <th>Date</th>
                             <th>Product</th>
-
-                            <th>SKU</th>
-
-                            <th>Category</th>
-
-                            <th>Location</th>
-
-                            <th>Stock</th>
-
+                            <th>Operation</th>
+                            <th>Quantity</th>
                             <th>Status</th>
 
                         </tr>
@@ -178,7 +261,7 @@
                     </thead>
 
 
-                    <tbody id="productsTable">
+                    <tbody id="historyTable">
 
                     </tbody>
 
@@ -189,113 +272,6 @@
         </section>
 
     </main>
-
-</div>
-
-
-<!-- PRODUCT MODAL -->
-
-<div id="productModal" class="modal">
-
-    <div class="modal-card">
-
-        <div class="modal-header">
-
-            <h2>Add Product</h2>
-
-            <button onclick="closeProductModal()">
-                ×
-            </button>
-
-        </div>
-
-
-        <form onsubmit="addProduct(event)">
-
-            <label>
-                Product Name
-            </label>
-
-            <input
-                id="productName"
-                type="text"
-                placeholder="Example: Wireless Mouse"
-                required
-            >
-
-
-            <label>
-                SKU / Code
-            </label>
-
-            <input
-                id="productSKU"
-                type="text"
-                placeholder="Example: WM-001"
-                required
-            >
-
-
-            <label>
-                Category
-            </label>
-
-            <select id="productCategory">
-
-                <option>
-                    Electronics
-                </option>
-
-                <option>
-                    Furniture
-                </option>
-
-                <option>
-                    Office Supplies
-                </option>
-
-                <option>
-                    Raw Materials
-                </option>
-
-            </select>
-
-
-            <label>
-                Initial Stock
-            </label>
-
-            <input
-                id="productStock"
-                type="number"
-                min="0"
-                placeholder="100"
-                required
-            >
-
-
-            <label>
-                Location
-            </label>
-
-            <input
-                id="productLocation"
-                type="text"
-                placeholder="Main Warehouse"
-                required
-            >
-
-
-            <button class="primary-btn"
-                    type="submit">
-
-                Create Product
-
-            </button>
-
-        </form>
-
-    </div>
 
 </div>
 
