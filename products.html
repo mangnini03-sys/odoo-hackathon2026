@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockSense | Products</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+                S
+            </div>
+
+            <div>
+                <h2>StockSense</h2>
+                <span>Inventory</span>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a class="nav-item" href="dashboard.html">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a class="nav-item active" href="products.html">
+                <span>▦</span>
+                Products
+            </a>
+
+            <a class="nav-item" href="operations.html">
+                <span>⇄</span>
+                Operations
+            </a>
+
+            <a class="nav-item" href="operations.html#history">
+                <span>◷</span>
+                Move History
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a class="nav-item" href="#">
+                <span>⚙</span>
+                Settings
+            </a>
+
+            <button class="logout-btn" onclick="logoutUser()">
+                <span>↪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="top-header">
+
+            <div>
+
+                <p class="small-label">
+                    Inventory
+                </p>
+
+                <h1>
+                    Products
+                </h1>
+
+                <p class="muted">
+                    Create and manage your products.
+                </p>
+
+            </div>
+
+
+            <button class="primary-btn small-btn"
+                    onclick="openProductModal()">
+
+                + Add Product
+
+            </button>
+
+        </header>
+
+
+        <!-- SEARCH -->
+
+        <section class="panel">
+
+            <div class="search-area">
+
+                <input
+                    type="text"
+                    id="productSearch"
+                    placeholder="Search by product name or SKU..."
+                    onkeyup="renderProducts()"
+                >
+
+                <select id="categoryFilter"
+                        onchange="renderProducts()">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="Electronics">
+                        Electronics
+                    </option>
+
+                    <option value="Furniture">
+                        Furniture
+                    </option>
+
+                    <option value="Office Supplies">
+                        Office Supplies
+                    </option>
+
+                    <option value="Raw Materials">
+                        Raw Materials
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Product</th>
+
+                            <th>SKU</th>
+
+                            <th>Category</th>
+
+                            <th>Location</th>
+
+                            <th>Stock</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="productsTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- PRODUCT MODAL -->
+
+<div id="productModal" class="modal">
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <h2>Add Product</h2>
+
+            <button onclick="closeProductModal()">
+                ×
+            </button>
+
+        </div>
+
+
+        <form onsubmit="addProduct(event)">
+
+            <label>
+                Product Name
+            </label>
+
+            <input
+                id="productName"
+                type="text"
+                placeholder="Example: Wireless Mouse"
+                required
+            >
+
+
+            <label>
+                SKU / Code
+            </label>
+
+            <input
+                id="productSKU"
+                type="text"
+                placeholder="Example: WM-001"
+                required
+            >
+
+
+            <label>
+                Category
+            </label>
+
+            <select id="productCategory">
+
+                <option>
+                    Electronics
+                </option>
+
+                <option>
+                    Furniture
+                </option>
+
+                <option>
+                    Office Supplies
+                </option>
+
+                <option>
+                    Raw Materials
+                </option>
+
+            </select>
+
+
+            <label>
+                Initial Stock
+            </label>
+
+            <input
+                id="productStock"
+                type="number"
+                min="0"
+                placeholder="100"
+                required
+            >
+
+
+            <label>
+                Location
+            </label>
+
+            <input
+                id="productLocation"
+                type="text"
+                placeholder="Main Warehouse"
+                required
+            >
+
+
+            <button class="primary-btn"
+                    type="submit">
+
+                Create Product
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

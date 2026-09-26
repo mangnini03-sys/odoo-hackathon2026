@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockSense | Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="brand-icon">S</div>
+
+            <div>
+                <h2>StockSense</h2>
+                <span>Inventory</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <a class="nav-item active" href="dashboard.html">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a class="nav-item" href="products.html">
+                <span>▦</span>
+                Products
+            </a>
+
+            <a class="nav-item" href="operations.html">
+                <span>⇄</span>
+                Operations
+            </a>
+
+            <a class="nav-item" href="operations.html#history">
+                <span>◷</span>
+                Move History
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a class="nav-item" href="#">
+                <span>⚙</span>
+                Settings
+            </a>
+
+            <button class="logout-btn" onclick="logoutUser()">
+                <span>↪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <header class="top-header">
+
+            <div>
+                <p class="small-label">Inventory Overview</p>
+
+                <h1>Good morning 👋</h1>
+
+                <p class="muted">
+                    Here's what's happening with your inventory today.
+                </p>
+            </div>
+
+            <div class="profile">
+
+                <div class="avatar">
+                    A
+                </div>
+
+                <div>
+                    <strong>Inventory Manager</strong>
+                    <span>Admin</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- KPI CARDS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    📦
+                </div>
+
+                <div>
+                    <span>Total Products</span>
+                    <h2 id="totalProducts">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon red">
+                    ⚠
+                </div>
+
+                <div>
+                    <span>Low / Out of Stock</span>
+                    <h2 id="lowStock">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    ↓
+                </div>
+
+                <div>
+                    <span>Pending Receipts</span>
+                    <h2 id="pendingReceipts">3</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    ↑
+                </div>
+
+                <div>
+                    <span>Pending Deliveries</span>
+                    <h2 id="pendingDeliveries">2</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTENT GRID -->
+
+        <section class="dashboard-grid">
+
+            <!-- STOCK OVERVIEW -->
+
+            <div class="panel large-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Stock Overview</h2>
+                        <p>Current inventory by category</p>
+                    </div>
+
+                    <a href="products.html" class="text-link">
+                        View products →
+                    </a>
+
+                </div>
+
+                <div class="stock-chart">
+
+                    <div class="chart-row">
+
+                        <div class="chart-info">
+                            <span>Electronics</span>
+                            <strong>78%</strong>
+                        </div>
+
+                        <div class="progress">
+                            <div style="width:78%"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="chart-row">
+
+                        <div class="chart-info">
+                            <span>Office Supplies</span>
+                            <strong>62%</strong>
+                        </div>
+
+                        <div class="progress">
+                            <div style="width:62%"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="chart-row">
+
+                        <div class="chart-info">
+                            <span>Furniture</span>
+                            <strong>45%</strong>
+                        </div>
+
+                        <div class="progress">
+                            <div style="width:45%"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="chart-row">
+
+                        <div class="chart-info">
+                            <span>Raw Materials</span>
+                            <strong>83%</strong>
+                        </div>
+
+                        <div class="progress">
+                            <div style="width:83%"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOW STOCK -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Low Stock</h2>
+                        <p>Needs attention</p>
+                    </div>
+
+                    <span class="alert-dot"></span>
+
+                </div>
+
+                <div id="lowStockList"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <section class="panel quick-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Quick Actions</h2>
+                    <p>Manage your inventory operations</p>
+                </div>
+
+            </div>
+
+            <div class="action-grid">
+
+                <a href="products.html" class="action-card">
+                    <div>📦</div>
+                    <strong>Products</strong>
+                    <span>Create & manage products</span>
+                </a>
+
+                <a href="operations.html" class="action-card">
+                    <div>📥</div>
+                    <strong>Receive Stock</strong>
+                    <span>Record incoming goods</span>
+                </a>
+
+                <a href="operations.html" class="action-card">
+                    <div>📤</div>
+                    <strong>Delivery</strong>
+                    <span>Process outgoing stock</span>
+                </a>
+
+                <a href="operations.html" class="action-card">
+                    <div>🔄</div>
+                    <strong>Transfer</strong>
+                    <span>Move stock internally</span>
+                </a>
+
+                <a href="operations.html" class="action-card">
+                    <div>⚖️</div>
+                    <strong>Adjustment</strong>
+                    <span>Fix stock mismatches</span>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT MOVES -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Recent Stock Movements</h2>
+                    <p>Latest inventory activity</p>
+                </div>
+
+                <a href="operations.html#history" class="text-link">
+                    View history →
+                </a>
+
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Operation</th>
+                            <th>Quantity</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="movementTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

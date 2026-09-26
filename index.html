@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockSense | Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-body">
+
+    <div class="login-card">
+
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <h1>StockSense</h1>
+        </div>
+
+        <p class="login-subtitle">
+            Smart inventory management made simple.
+        </p>
+
+        <form onsubmit="loginUser(event)">
+
+            <label>Email</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label>Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button class="primary-btn" type="submit">
+                Sign In
+            </button>
+
+        </form>
+
+        <p class="demo-text">
+            Demo: use any email and password
+        </p>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
